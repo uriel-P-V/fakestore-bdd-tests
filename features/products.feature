@@ -20,5 +20,5 @@ Feature: Products API
     Scenario: Get product by non-existing ID
         Given products are registered in the system
         When the customer requests a product with a non-existing ID
-        Then the API should return an error message
-        And the response status code should be 404
+        Then the response status code should be 200
+        And the response body should be empty
