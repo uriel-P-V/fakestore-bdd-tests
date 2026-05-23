@@ -16,11 +16,10 @@ def step_then_status_code(context, expected_status):
 
 @then("the response body should be empty")
 def step_then_empty_body(context):
-    text = context.response.text.strip()
-    if text == "" or text == "null":
-        return  # ambos son válidos como "vacío"
     try:
         data = context.response.json()
         assert data is None, f"Expected empty body but got: {data}"
-    except requests.exceptions.JSONDecodeError:
-        assert text == "", f"Expected empty body but got: {text}"
+    except Exception:
+        assert context.response.text.strip() == "", (
+            f"Expected empty body but got: {context.response.text}"
+        )
