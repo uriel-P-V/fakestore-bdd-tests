@@ -119,8 +119,12 @@ behave features/users.feature
 ---
 
 ## CI/CD Pipeline
-
 Two dependent jobs run on every push and pull request to `main`:
+If `smoke` fails, `regression` is skipped automatically.
+
+> **Note:** FakeStore API blocks requests from CI/CD datacenter IPs (403 Forbidden).
+> Smoke tests are configured with `continue-on-error: true` in CI.
+> Run `behave --tags=smoke` locally to validate against the real API.
 
 ```
 push / PR → smoke (3 scenarios) → regression (6 scenarios) 
@@ -154,6 +158,9 @@ Public REST API for e-commerce testing. No authentication required.
 - **GitHub Actions** — CI/CD pipeline
 
 ---
+
+
+
 
 ## Author
 
