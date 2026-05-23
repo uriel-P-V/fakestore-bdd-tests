@@ -5,9 +5,10 @@ API_BASE_URL = "https://fakestoreapi.com"
 
 @given("the Store API is available")
 def step_given_api_available(context):
-    context.response = requests.get(f"{API_BASE_URL}/products")
-    assert context.response.status_code == 200
-
+    context.response = requests.get(f"{API_BASE_URL}/products", timeout=10)
+    assert context.response.status_code == 200, (
+        f"API health check failed with status: {context.response.status_code}"
+    )
 
 @then("the response status code should be {expected_status:d}")
 def step_then_status_code(context, expected_status):

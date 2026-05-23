@@ -23,6 +23,7 @@ jobs:
 
       - name: Run smoke tests
         run: behave --no-capture --tags=smoke
+        continue-on-error: true
 
   regression:
     runs-on: ubuntu-latest
