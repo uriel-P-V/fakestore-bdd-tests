@@ -20,6 +20,8 @@ def mock_products_get(url, **kwargs):
         mock.status_code = 200
         mock.json.return_value = MOCK_PRODUCT
     else:
-        mock.status_code = 404
-        mock.json.return_value = {"message": "Product not found"}
+        # producto no existente — igual que la API real
+        mock.status_code = 200
+        mock.text = ""
+        mock.json.side_effect = Exception("No JSON")
     return mock
